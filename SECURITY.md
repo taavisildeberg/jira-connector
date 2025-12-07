@@ -14,7 +14,7 @@ This document outlines security vulnerabilities identified in the jira-connector
 
 **Vulnerabilities**:
 1. **Server-Side Request Forgery (SSRF)** - CVE-2023-28155
-   - CVSS Score: 6.1 (MEDIUM-HIGH)
+   - CVSS Score: 6.1 (MEDIUM)
    - Impact: Attackers could potentially manipulate HTTP requests
    - GitHub Advisory: GHSA-p8p7-x288-28g6
 
@@ -109,9 +109,10 @@ This document outlines security vulnerabilities identified in the jira-connector
 If you discover a security vulnerability in jira-connector, please report it by:
 
 1. **DO NOT** open a public GitHub issue
-2. Email the maintainers directly at: [maintainer email needed]
-3. Provide detailed information about the vulnerability
-4. Allow reasonable time for a fix before public disclosure
+2. Use GitHub's Security Advisory feature (Recommended): Navigate to the repository's "Security" tab and click "Report a vulnerability"
+3. Alternatively, open a private issue by contacting repository maintainers through GitHub
+4. Provide detailed information about the vulnerability
+5. Allow reasonable time for a fix before public disclosure
 
 ## Security Checklist for Users
 

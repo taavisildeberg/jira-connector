@@ -146,13 +146,14 @@ try {
   - Consider using `util.promisify` internally
 
 #### 8. **Documentation Typos**
-- **Location**: Multiple files
-- **Examples**:
+- **Location**: Multiple files in the codebase (not in this review documentation)
+- **Examples identified in source code**:
   - `index.js`, line 100: "accses" → "access"
   - `index.js`, line 104: "tp" → "to"
   - `index.js`, line 307: "Myslef" → "Myself"
   - `attachment.js`, line 8: "atachment" → "attachment"
   - `lib/oauth_util.js`, line 22: "accses" → "access"
+- **Recommendation**: These typos should be fixed in a separate PR to the source code
 
 #### 9. **Missing .npmignore**
 - **Finding**: No `.npmignore` file to exclude unnecessary files from npm package

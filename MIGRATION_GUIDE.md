@@ -151,10 +151,11 @@ this.generateOAuthHeader = function(method, url, oauthConfig) {
     const oauth = OAuth({
         consumer: {
             key: oauthConfig.consumer_key,
-            secret: oauthConfig.private_key
+            secret: oauthConfig.private_key  // Jira uses RSA private key here
         },
         signature_method: 'RSA-SHA1',
         hash_function(base_string, key) {
+            // RSA-SHA1 signing for Jira OAuth
             return crypto
                 .createSign('RSA-SHA1')
                 .update(base_string)
@@ -167,7 +168,8 @@ this.generateOAuthHeader = function(method, url, oauthConfig) {
         secret: oauthConfig.token_secret
     };
 
-    return oauth.toHeader(oauth.authorize({url, method}, token));
+    const authHeader = oauth.toHeader(oauth.authorize({url, method}, token));
+    return authHeader.Authorization;  // Extract Authorization header value
 };
 ```
 
@@ -203,10 +205,14 @@ exports.getAuthorizeURL = async function (config) {
         method: 'POST'
     };
 
-    const headers = oauth.toHeader(oauth.authorize(requestData));
+    const authHeader = oauth.toHeader(oauth.authorize(requestData));
 
     try {
-        const response = await axios.post(requestData.url, null, { headers });
+        const response = await axios.post(requestData.url, null, { 
+            headers: authHeader,
+            responseType: 'text'  // OAuth responses are URL-encoded text
+        });
+        // Parse URL-encoded OAuth response
         const params = new URLSearchParams(response.data);
         const token = params.get('oauth_token');
         const token_secret = params.get('oauth_token_secret');
